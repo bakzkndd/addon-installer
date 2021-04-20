@@ -1,0 +1,10 @@
+{
+	"name": "Addon Installer",
+	"description": "Easily install plugins and themes with the push of a button.",
+	"version": "1.0.0",
+	"license": "MIT",
+	"author": {
+		"name": "Vbriese",
+		"id": "441384103946878987"
+	}
+}
