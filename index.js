@@ -5,6 +5,8 @@ import { patch } from "@vizality/patcher";
 import { getModule } from "@vizality/webpack";
 import { ContextMenu } from "@vizality/components";
 
+import ToastHeader from "./components/ToastHeader";
+
 let unpatch = () => {
 	console.log("addon-installer not patched.");
 };
@@ -20,8 +22,6 @@ export default class AddonInstaller extends Plugin {
 			MessageContextMenu,
 			"default",
 			(args, res) => {
-				console.log(args);
-
 				let isPlugin;
 
 				const channelId = args[0].channel?.id;
@@ -45,9 +45,20 @@ export default class AddonInstaller extends Plugin {
 										}
 									);
 
-									this.log("Addon installation succeeded!");
+									vizality.api.notifications.sendToast({
+										header: (
+											<ToastHeader isSuccess={true} isPlugin={isPlugin} />
+										),
+										timeout: 2000,
+									});
 								} catch (error) {
-									this.log("Addon installation failed!", error);
+									this.log("Addon installation failed!\n", error);
+									vizality.api.notifications.sendToast({
+										header: (
+											<ToastHeader isSuccess={false} isPlugin={isPlugin} />
+										),
+										timeout: 3000,
+									});
 								}
 							}}
 						/>
