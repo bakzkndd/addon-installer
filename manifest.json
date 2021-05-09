@@ -1,7 +1,7 @@
 {
 	"name": "Addon Installer",
-	"description": "Easily install plugins and themes with the push of a button.",
-	"version": "1.2.0",
+	"description": "Easily install plugins and themes from a context menu.",
+	"version": "2.0.0",
 	"license": "MIT",
 	"author": {
 		"name": "Vbriese",
