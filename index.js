@@ -12,21 +12,35 @@ export default class AddonInstaller extends Plugin {
 			getModule((m) => m.default?.displayName === "MessageContextMenu"),
 			"default",
 			(args, res) => {
-				const channelId = args[0].channel?.id;
-				const isPlugin = channelId == "753291447523868753" && true;
+				const addonURL = args[0].message.embeds[0].fields[0].rawValue;
+				const addonID = addonURL.split("/").pop().toLowerCase();
 
-				if (isPlugin || channelId == "753291485100769411")
+				const channelID = args[0].channel?.id;
+				const isPlugin = channelID == "753291447523868753" && true;
+				const pluginsOrThemes = isPlugin ? "plugins" : "themes";
+
+				const addonIsInstalled = vizality.manager[
+					pluginsOrThemes
+				].keys.includes(addonID);
+
+				if (isPlugin || channelID == "753291485100769411")
 					res.props.children.push(
 						<>
 							<ContextMenu.Separator />
 							<ContextMenu.Group>
 								<ContextMenu.Item
-									label={`Install ${isPlugin ? "Plugin" : "Theme"}`}
+									label={`${addonIsInstalled ? "Uninstall" : "Install"} ${
+										isPlugin ? "Plugin" : "Theme"
+									}`}
 									id="addon-installer"
 									action={async () => {
-										await vizality.manager[
-											isPlugin ? "plugins" : "themes"
-										].install(args[0].message.embeds[0].fields[0].rawValue);
+										if (addonIsInstalled) {
+											await vizality.manager[pluginsOrThemes].uninstall(
+												addonID
+											);
+										} else {
+											await vizality.manager[pluginsOrThemes].install(addonURL);
+										}
 									}}
 								/>
 							</ContextMenu.Group>
