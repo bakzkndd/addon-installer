@@ -15,7 +15,8 @@ export default class AddonInstaller extends Plugin {
         const channelID = args[0].channel?.id;
         if (channelID === '755005584322854972') {
           if (vizality.manager.plugins.isInstalled('00pccompat') && vizality.manager.plugins.isEnabled('00pccompat')) {
-            const addonURL = args[0].href.match(/^https?:\/\/(www.)?git(hub|lab).com\/[\w-]+\/[\w-]+\/?/);
+            // eslint-disable-next-line no-useless-escape
+            const addonURL = args[0].href.match(/(http|https)\:\/\/github\.com\/(.+)\/(.*?)\.git/);
             const addonID = addonURL.split('/').pop().toLowerCase();
             const isPlugin = channelID === '755005584322854972' && true;
             const addonIsInstalled = vizality.manager[
