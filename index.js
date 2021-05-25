@@ -9,14 +9,13 @@ export default class AddonInstaller extends Plugin {
   start () {
     patch(
       'addon-installer',
-      getModule((m) => m.default?.displayName === 'MessageContextMenu'),
+      getModule((m) => m.default && m.default?.displayName === 'MessageContextMenu'),
       'default',
       (args, res) => {
         const channelID = args[0].channel?.id;
         if (channelID === '755005584322854972') {
           if (vizality.manager.plugins.isInstalled('00pccompat') && vizality.manager.plugins.isEnabled('00pccompat')) {
-            const url = args[0].message.content[0].find(e => e);
-            const addonURL = url.rawValue.startswith('<') ? url.rawValue.replace(/<|>/g, '') : url.rawValue;
+            const addonURL = args[0].href.match(/^https?:\/\/(www.)?git(hub|lab).com\/[\w-]+\/[\w-]+\/?/);
             const addonID = addonURL.split('/').pop().toLowerCase();
             const isPlugin = channelID === '755005584322854972' && true;
             const addonIsInstalled = vizality.manager[
