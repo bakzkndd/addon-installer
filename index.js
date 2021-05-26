@@ -5,7 +5,7 @@ import { patch, unpatchAll } from '@vizality/patcher';
 import { getModule } from '@vizality/webpack';
 import { ContextMenu } from '@vizality/components';
 
-const githubRegex = /https?:\/\/github\.com\/[a-zA-Z0-9-]+\/[a-zA-Z0-9-]+\/?$/m;
+const githubRegex = /https?:\/\/github\.com\/[a-zA-Z0-9-]+\/[a-zA-Z0-9-]+\/?/m;
 
 export default class AddonInstaller extends Plugin {
   start () {
