@@ -34,7 +34,7 @@ export default class AddonInstaller extends Plugin {
             args[0].message?.content.match(/https?:\/\/github\.com\/[a-zA-Z0-9-]+\/[a-zA-Z0-9-]+\/?/m)[0];
           const addonID = toKebabCase(addonURL.split('/').pop());
 
-          const pluginsOrThemes = isPlugin ? 'plugins' : 'themes';
+          const pluginsOrThemes = (isPlugin || isPowercordPlugin) ? 'plugins' : 'themes';
 
           const addonIsInstalled = vizality.manager[
             pluginsOrThemes
