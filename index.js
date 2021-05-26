@@ -26,16 +26,16 @@ export default class AddonInstaller extends Plugin {
                   <ContextMenu.Separator />
                   <ContextMenu.Group>
                     <ContextMenu.Item
-                      label={`${addonIsInstalled ? 'Uninstall' : 'Install'} ${isPlugin === 'Plugin'
+                      label={`${addonIsInstalled ? 'Uninstall' : 'Install'} ${'Plugin'
                       }`}
                       id="addon-installer"
                       action={async () => {
                         if (addonIsInstalled) {
-                          await vizality.manager.plugin.uninstall(
+                          await vizality.manager.plugins.uninstall(
                             addonID
                           );
                         } else {
-                          await vizality.manager.plugin.install(addonURL);
+                          await vizality.manager.plugins.install(addonURL);
                         }
                       }}
                     />
