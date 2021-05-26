@@ -5,8 +5,6 @@ import { patch, unpatchAll } from '@vizality/patcher';
 import { getModule } from '@vizality/webpack';
 import { ContextMenu } from '@vizality/components';
 
-const githubRegex = /https?:\/\/github\.com\/[a-zA-Z0-9-]+\/[a-zA-Z0-9-]+\/?/m;
-
 export default class AddonInstaller extends Plugin {
   start () {
     patch(
@@ -17,7 +15,7 @@ export default class AddonInstaller extends Plugin {
         const channelID = args[0].channel?.id;
         if (channelID === '755005584322854972') {
           if (vizality.manager.plugins.isEnabled('00pccompat')) {
-            const addonURL = args[0].message?.content.match(githubRegex)[0];
+            const addonURL = args[0].message?.content.match(/https?:\/\/github\.com\/[a-zA-Z0-9-]+\/[a-zA-Z0-9-]+\/?/m)[0];
             const addonID = addonURL.split('/').pop().toLowerCase();
             const addonIsInstalled = vizality.manager.plugins.keys.includes(addonID);
             res.props.children.push(
