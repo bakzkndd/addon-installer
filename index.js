@@ -11,7 +11,7 @@ export default class AddonInstaller extends Plugin {
   start () {
     patch(
       'addon-installer',
-      getModule((m) => m.default && m.default?.displayName === 'MessageContextMenu'),
+      getModule((m) => m.default?.displayName === 'MessageContextMenu'),
       'default',
       (args, res) => {
         const channelID = args[0].channel?.id;
