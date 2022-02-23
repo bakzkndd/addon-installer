@@ -45,7 +45,7 @@ export default class AddonInstaller extends Plugin {
           args[0].message?.embeds[0]?.fields[0]?.rawValue ||
           args[0].message?.embeds[0]?.rawDescription?.match(
             /https?:\/\/github\.com\/[a-zA-Z0-9-]+\/[a-zA-Z0-9-]+\/?/m
-          )[0] ||
+          )?.[0] ||
           args[0].message?.content.match(
             /https?:\/\/github\.com\/[a-zA-Z0-9-]+\/[a-zA-Z0-9-]+\/?/m
           )[0];
