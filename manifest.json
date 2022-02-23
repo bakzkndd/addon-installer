@@ -1,7 +1,7 @@
 {
 	"name": "Addon Installer",
 	"description": "Easily install plugins and themes from a context menu.",
-	"version": "2.3.0",
+	"version": "2.4.0",
 	"license": "MIT",
 	"author": {
 		"name": "bakzkndd",

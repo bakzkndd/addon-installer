@@ -27,18 +27,25 @@ export default class AddonInstaller extends Plugin {
       const channelID = args[0].channel?.id;
       const isPlugin = channelID === "753291447523868753";
       const isPowercordPlugin = channelID === "755005584322854972";
+      const isPowercordTheme = channelID === "755005710323941386";
+      const isBDTheme =
+        channelID === "813903993524715522" ||
+        channelID === "781600198002081803";
 
       if (
         isPlugin ||
         channelID === "912198952248545320" ||
+        isPowercordTheme ||
+        isBDTheme ||
         (vizality.manager.plugins.isInstalled("00pccompat") &&
           vizality.manager.plugins.isEnabled("00pccompat") &&
           (isPowercordPlugin || channelID === "755005710323941386"))
       ) {
         const addonURL =
-          (args[0].message?.embeds &&
-            args[0].message?.embeds[0]?.fields &&
-            args[0].message?.embeds[0]?.fields[0].rawValue) ||
+          args[0].message?.embeds[0]?.fields[0]?.rawValue ||
+          args[0].message?.embeds[0]?.rawDescription?.match(
+            /https?:\/\/github\.com\/[a-zA-Z0-9-]+\/[a-zA-Z0-9-]+\/?/m
+          )[0] ||
           args[0].message?.content.match(
             /https?:\/\/github\.com\/[a-zA-Z0-9-]+\/[a-zA-Z0-9-]+\/?/m
           )[0];
